@@ -1,17 +1,82 @@
+#![allow(non_camel_case_types)]
+
 extern crate libc;
 
+pub type ogg_int64_t = libc::int64_t;
+
 #[repr(C)]
-pub struct ogg_iovec_t;
+pub struct ogg_iovec_t {
+    pub iov_base: *mut libc::c_void,
+    pub iov_len: libc::size_t,
+}
+
 #[repr(C)]
-pub struct oggpack_buffer;
+pub struct oggpack_buffer {
+    pub endbyte: libc::c_long,
+    pub endbit: libc::c_int,
+
+    pub buffer: *mut libc::c_uchar,
+    pub ptr: *mut libc::c_uchar,
+    pub storage: libc::c_long,
+}
+
 #[repr(C)]
-pub struct ogg_page;
+pub struct ogg_page {
+    pub header: *mut libc::c_uchar,
+    pub header_len: libc::c_long,
+    pub body: *mut libc::c_uchar,
+    pub body_len: libc::c_long,
+}
+
 #[repr(C)]
-pub struct ogg_stream_state;
+pub struct ogg_stream_state {
+    pub body_data: *mut libc::c_uchar,
+    pub body_storage: libc::c_long,
+    pub body_fill: libc::c_long,
+    pub body_returned: libc::c_long,
+
+    pub lacing_vals: *mut libc::c_int,
+    pub granule_vals: *mut ogg_int64_t,
+
+    pub lacing_storage: libc::c_long,
+    pub lacing_fill: libc::c_long,
+    pub lacing_packet: libc::c_long,
+    pub lacing_returned: libc::c_long,
+
+    pub header: [libc::c_uchar, ..282],
+    pub header_fill: libc::c_int,
+
+    pub e_o_s: libc::c_int,
+    pub b_o_s: libc::c_int,
+    pub serialno: libc::c_long,
+    pub pageno: libc::c_long,
+    pub packetno: ogg_int64_t,
+    pub granulepos: ogg_int64_t,
+}
+
 #[repr(C)]
-pub struct ogg_packet;
+pub struct ogg_packet {
+    pub packet: *mut libc::c_uchar,
+    pub bytes: libc::c_long,
+    pub b_o_s: libc::c_long,
+    pub e_o_s: libc::c_long,
+
+    pub granulepos: ogg_int64_t,
+
+    pub packetno: ogg_int64_t,
+}
+
 #[repr(C)]
-pub struct ogg_sync_state;
+pub struct ogg_sync_state {
+    pub data: *mut libc::c_uchar,
+    pub storage: libc::c_int,
+    pub fill: libc::c_int,
+    pub returned: libc::c_int,
+
+    pub unsynced: libc::c_int,
+    pub headerbytes: libc::c_int,
+    pub bodybytes: libc::c_int,
+}
 
 extern {
     pub fn oggpack_writeinit(b: *mut oggpack_buffer);
@@ -59,7 +124,7 @@ extern {
 
     pub fn ogg_stream_packetin(os: *mut ogg_stream_state, op: *mut ogg_packet) -> libc::c_int;
     pub fn ogg_stream_iovecin(os: *mut ogg_stream_state, iov: *mut ogg_iovec_t, count: libc::c_int,
-        e_o_s: libc::c_long, granulepos: libc::int64_t) -> libc::c_int;
+        e_o_s: libc::c_long, granulepos: ogg_int64_t) -> libc::c_int;
     pub fn ogg_stream_pageout(os: *mut ogg_stream_state, og: *mut ogg_page) -> libc::c_int;
     pub fn ogg_stream_pageout_fill(os: *mut ogg_stream_state, og: *mut ogg_page,
         nfill: libc::c_int) -> libc::c_int;
@@ -96,7 +161,7 @@ extern {
     pub fn ogg_page_continued(og: *const ogg_page) -> libc::c_int;
     pub fn ogg_page_bos(og: *const ogg_page) -> libc::c_int;
     pub fn ogg_page_eos(og: *const ogg_page) -> libc::c_int;
-    pub fn ogg_page_granulepos(og: *const ogg_page) -> libc::int64_t;
+    pub fn ogg_page_granulepos(og: *const ogg_page) -> ogg_int64_t;
     pub fn ogg_page_serialno(og: *const ogg_page) -> libc::c_int;
     pub fn ogg_page_pageno(og: *const ogg_page) -> libc::c_long;
     pub fn ogg_page_packets(og: *const ogg_page) -> libc::c_int;
