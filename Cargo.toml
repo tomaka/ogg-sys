@@ -7,3 +7,6 @@ links = "ogg"
 
 [build-dependencies.gcc]
 git = "https://github.com/alexcrichton/gcc-rs"
+
+[build-dependencies.pkg-config]
+git = "https://github.com/alexcrichton/pkg-config-rs"

@@ -1,6 +1,13 @@
+extern crate "pkg-config" as pkg_config;
 extern crate gcc;
 
 fn main() {
+    let opts = pkg_config::default_options("ogg");
+    match pkg_config::find_library_opts("ogg", &opts) {
+        Ok(()) => return,
+        Err(..) => {}
+    };
+
     let root = Path::new(std::os::getenv("CARGO_MANIFEST_DIR").unwrap())
         .join("libogg");
 
