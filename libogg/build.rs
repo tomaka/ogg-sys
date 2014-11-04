@@ -17,10 +17,8 @@ fn main() {
 
     println!("cargo:include={}", root.join("include").display());
 
-    let libfiles_root = root.join("src");
-
     gcc::compile_library("libogg.a", &config, &[
-        libfiles_root.join("bitwise.c").as_str().unwrap(),
-        libfiles_root.join("framing.c").as_str().unwrap(),
+        "libogg/src/bitwise.c",
+        "libogg/src/framing.c",
     ]);
 }
