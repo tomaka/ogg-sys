@@ -3,7 +3,7 @@ name = "ogg-sys"
 version = "0.0.1"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
 build = "libogg/build.rs"
-links = ["ogg"]
+links = "ogg"
 
 [build-dependencies.gcc]
 git = "https://github.com/alexcrichton/gcc-rs"
