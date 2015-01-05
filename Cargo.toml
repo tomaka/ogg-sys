@@ -1,12 +1,10 @@
 [package]
 name = "ogg-sys"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
 build = "libogg/build.rs"
 links = "ogg"
 
-[build-dependencies.gcc]
-git = "https://github.com/alexcrichton/gcc-rs"
-
-[build-dependencies.pkg-config]
-git = "https://github.com/alexcrichton/pkg-config-rs"
+[build-dependencies]
+gcc = "*"
+pkg-config = "*"

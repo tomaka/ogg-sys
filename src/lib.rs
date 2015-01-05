@@ -1,3 +1,4 @@
+#![allow(missing_copy_implementations)]
 #![allow(non_camel_case_types)]
 
 extern crate libc;
@@ -43,7 +44,7 @@ pub struct ogg_stream_state {
     pub lacing_packet: libc::c_long,
     pub lacing_returned: libc::c_long,
 
-    pub header: [libc::c_uchar, ..282],
+    pub header: [libc::c_uchar; 282],
     pub header_fill: libc::c_int,
 
     pub e_o_s: libc::c_int,
