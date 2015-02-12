@@ -2,13 +2,15 @@ extern crate "pkg-config" as pkg_config;
 extern crate gcc;
 
 fn main() {
+    let root = Path::new(std::env::var("CARGO_MANIFEST_DIR").unwrap())
+        .join("libogg");
+
+    println!("cargo:include={}", root.join("include").display());
+
     match pkg_config::find_library("ogg") {
         Ok(_) => return,
         Err(..) => {}
     };
-
-    let root = Path::new(std::env::var("CARGO_MANIFEST_DIR").unwrap())
-        .join("libogg");
 
     gcc::Config::new()
                 .file("libogg/src/bitwise.c")
