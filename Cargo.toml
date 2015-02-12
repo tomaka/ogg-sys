@@ -1,12 +1,15 @@
 [package]
 name = "ogg-sys"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
 build = "libogg/build.rs"
 links = "ogg"
 description = "FFI for libogg, the media container."
 license = "MIT"
 repository = "https://github.com/tomaka/ogg-sys"
+
+[dependencies]
+libc = "*"
 
 [build-dependencies]
 gcc = "*"
