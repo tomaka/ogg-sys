@@ -3,11 +3,11 @@ extern crate gcc;
 
 fn main() {
     match pkg_config::find_library("ogg") {
-        Ok(()) => return,
+        Ok(_) => return,
         Err(..) => {}
     };
 
-    let root = Path::new(std::os::getenv("CARGO_MANIFEST_DIR").unwrap())
+    let root = Path::new(std::env::var("CARGO_MANIFEST_DIR").unwrap())
         .join("libogg");
 
     gcc::Config::new()

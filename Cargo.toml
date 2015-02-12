@@ -1,6 +1,6 @@
 [package]
 name = "ogg-sys"
-version = "0.0.4"
+version = "0.0.5"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
 build = "libogg/build.rs"
 links = "ogg"
