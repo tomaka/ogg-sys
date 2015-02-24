@@ -12,5 +12,5 @@ repository = "https://github.com/tomaka/ogg-sys"
 libc = "*"
 
 [build-dependencies]
-gcc = "*"
-pkg-config = "*"
+gcc = "0.2"
+pkg-config = "0.2"
