@@ -1,6 +1,6 @@
 [package]
 name = "ogg-sys"
-version = "0.0.7"
+version = "0.0.8"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
 build = "libogg/build.rs"
 links = "ogg"
@@ -12,5 +12,5 @@ repository = "https://github.com/tomaka/ogg-sys"
 libc = "*"
 
 [build-dependencies]
-gcc = "0.2"
-pkg-config = "0.2"
+gcc = "0.3"
+pkg-config = "0.3"

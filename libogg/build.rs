@@ -1,8 +1,10 @@
 extern crate "pkg-config" as pkg_config;
 extern crate gcc;
 
+use std::path::PathBuf;
+
 fn main() {
-    let root = Path::new(std::env::var("CARGO_MANIFEST_DIR").unwrap())
+    let root = PathBuf::new(&std::env::var("CARGO_MANIFEST_DIR").unwrap())
         .join("libogg");
 
     println!("cargo:include={}", root.join("include").display());
@@ -17,6 +19,6 @@ fn main() {
                 .file("libogg/src/framing.c")
                 .define("_USRDLL", None)
                 .define("LIBOGG_EXPORTS", None)
-                .include(root.join("include"))
+                .include(&root.join("include"))
                 .compile("libogg.a");
 }
