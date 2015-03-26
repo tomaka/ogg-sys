@@ -1,11 +1,11 @@
-extern crate "pkg-config" as pkg_config;
+extern crate pkg_config;
 extern crate gcc;
 
-use std::path::PathBuf;
+use std::path::Path;
 
 fn main() {
-    let root = PathBuf::new(&std::env::var("CARGO_MANIFEST_DIR").unwrap())
-        .join("libogg");
+    let root = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+    let root = Path::new(&root).join("libogg");
 
     println!("cargo:include={}", root.join("include").display());
 
